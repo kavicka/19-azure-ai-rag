@@ -1,17 +1,43 @@
 [project]
-name = "nn-short-name"
+name = "azure-ai-rag"
 version = "0.1.0"
-description = "One-line description of the step"
+description = "Step 19: the step 15 clinical-trials RAG on Azure OpenAI + Azure AI Search, measured against the local stack"
 requires-python = ">=3.12"
 dependencies = [
-    "matplotlib>=3.11.2",
-    "numpy>=2.5.4",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "httpx>=0.28",
+    "pydantic-settings>=2.6",
+    "qdrant-client>=1.12",
+    "numpy>=2.1",
+]
+
+[project.optional-dependencies]
+# Embedding backends: pick one. onnx = no PyTorch (step 17); torch is what steps 14-15 used.
+onnx = ["fastembed>=0.9"]
+torch = ["sentence-transformers>=3.3"]
+# Cloud providers are optional: the default stack runs fully local (Ollama + Qdrant) at 0 €.
+bedrock = ["boto3>=1.35"]
+azure = [
+    "openai>=1.55",
+    "azure-identity>=1.19",           # Entra ID (az login / managed identity): no API keys anywhere
+    "azure-search-documents>=11.5",
 ]
 
 [dependency-groups]
 dev = [
-    "ruff>=0.17.3",
+    "matplotlib>=3.9",
+    "ruff>=0.8",
+    "pytest>=8.3",
 ]
 
 [tool.ruff]
 line-length = 120
+extend-exclude = ["frontend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

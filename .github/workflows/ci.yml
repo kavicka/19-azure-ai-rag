@@ -1,11 +1,44 @@
 name: ci
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+
+# No Azure login in CI on purpose: the Azure code is tested against the real SDKs with fake HTTP transports,
+# and the Terraform plan with a mocked provider. Real Azure runs happen once, by hand, and cost cents.
 jobs:
-  lint:
+  python:
+    name: lint + unit tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
-      - run: uv sync
+      - run: uv sync --extra azure   # no embedding backend: unit tests don't load models
       - run: uv run ruff check .
       - run: uv run ruff format --check .
+      - run: uv run pytest -q
+
+  terraform:
+    name: terraform fmt + validate + test (mocked provider)
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: infra } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend=false -input=false
+      - run: terraform validate
+      - run: terraform test
+
+  frontend:
+    name: frontend type-check + build
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: frontend/package-lock.json }
+      - run: npm ci
+      - run: npm run build

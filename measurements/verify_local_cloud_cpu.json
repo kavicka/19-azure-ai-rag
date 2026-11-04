@@ -1,0 +1,67 @@
+{
+ "retrieval": {
+  "local": {
+   "meta": {
+    "date": "2026-11-04T13:03:12+00:00",
+    "hardware": "Linux x86_64, onnxruntime cpu, 4 cores",
+    "search_provider": "local",
+    "embed_provider": "local",
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": null,
+    "retriever": "local:bm25+qdrant(BAAI/bge-small-en-v1.5)",
+    "n_questions": 141,
+    "modes": [
+     "bm25",
+     "dense",
+     "hybrid",
+     "rerank"
+    ]
+   },
+   "section": {
+    "n_chunks": 5218,
+    "bm25": {
+     "evidence@1": 0.421,
+     "evidence@5": 0.905,
+     "evidence@10": 0.984,
+     "evidence_mrr@10": 0.613,
+     "trial@1": 0.993,
+     "trial@5": 1.0,
+     "latency_ms_p50": 0.2,
+     "latency_ms_p95": 0.4
+    },
+    "dense": {
+     "evidence@1": 0.667,
+     "evidence@5": 0.968,
+     "evidence@10": 0.992,
+     "evidence_mrr@10": 0.788,
+     "trial@1": 1.0,
+     "trial@5": 1.0,
+     "latency_ms_p50": 58.4,
+     "latency_ms_p95": 88.0
+    },
+    "hybrid": {
+     "evidence@1": 0.492,
+     "evidence@5": 0.976,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.705,
+     "trial@1": 1.0,
+     "trial@5": 1.0,
+     "latency_ms_p50": 67.7,
+     "latency_ms_p95": 88.3
+    },
+    "rerank": {
+     "evidence@1": 0.857,
+     "evidence@5": 0.992,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.917,
+     "trial@1": 0.993,
+     "trial@5": 1.0,
+     "latency_ms_p50": 1141.4,
+     "latency_ms_p95": 1643.4
+    }
+   }
+  }
+ }
+}
