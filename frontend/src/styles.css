@@ -1,0 +1,82 @@
+:root {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --blue: #2563eb;
+  --blue-soft: #dbeafe;
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --orange: #ea580c;
+  --orange-soft: #ffedd5;
+  --red: #dc2626;
+  --red-soft: #fee2e2;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --line: #334155;
+    --blue-soft: #1e3a8a;
+    --green-soft: #14532d;
+    --orange-soft: #7c2d12;
+    --red-soft: #7f1d1d;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); }
+button { font: inherit; cursor: pointer; }
+.app { max-width: 1280px; margin: 0 auto; padding: 16px; }
+header h1 { margin: 0 0 4px; font-size: 1.5rem; }
+.muted { color: var(--muted); }
+.small { font-size: 0.8rem; font-weight: normal; }
+.ask { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 12px 0; }
+.ask textarea { width: 100%; font: inherit; padding: 8px; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: inherit; resize: vertical; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; }
+.modes { display: flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.modes button { border: 0; padding: 6px 12px; background: transparent; color: inherit; border-right: 1px solid var(--line); }
+.modes button:last-child { border-right: 0; }
+.modes button.on { background: var(--blue); color: #fff; }
+.k input { width: 4em; margin-left: 4px; }
+.primary { margin-left: auto; background: var(--blue); color: #fff; border: 0; border-radius: 6px; padding: 7px 18px; }
+.primary:disabled { opacity: 0.5; cursor: default; }
+.examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.examples button { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 3px 10px; font-size: 0.8rem; text-align: left; }
+main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 12px; }
+@media (max-width: 860px) { main { grid-template-columns: 1fr; } .primary { margin-left: 0; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; min-width: 0; }
+.panel h2 { font-size: 1rem; margin: 0 0 8px; }
+.answer .text { line-height: 1.6; font-size: 1.05rem; }
+.caret { display: inline-block; width: 8px; height: 1em; background: var(--blue); margin-left: 2px; vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.cite { border: 0; background: var(--blue-soft); color: inherit; border-radius: 4px; padding: 0 5px; font-family: ui-monospace, monospace; font-size: 0.85em; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; background: var(--line); }
+.badge.ok { background: var(--green-soft); }
+.badge.warn { background: var(--orange-soft); }
+.badge.bad { background: var(--red-soft); }
+.error { color: var(--red); white-space: pre-wrap; }
+.sources ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.sources li { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.sources li.cited { border-color: var(--green); }
+.hit-head { display: flex; gap: 8px; align-items: center; }
+.section { font-size: 0.8rem; color: var(--muted); }
+.hit-title { font-size: 0.85rem; margin: 4px 0; }
+.scores { display: grid; gap: 2px; }
+.score { display: grid; grid-template-columns: 52px 1fr 64px; gap: 6px; align-items: center; font-size: 0.75rem; }
+.score code { text-align: right; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar div { height: 100%; background: var(--blue); }
+details summary { font-size: 0.75rem; color: var(--muted); cursor: pointer; margin-top: 4px; }
+pre, .pre { white-space: pre-wrap; word-break: break-word; font-size: 0.8rem; margin: 4px 0 0; }
+.drawer-backdrop { position: fixed; inset: 0; background: rgb(0 0 0 / 0.35); display: flex; justify-content: flex-end; }
+.drawer { width: min(640px, 100%); height: 100%; overflow-y: auto; background: var(--panel); padding: 16px 20px; position: relative; }
+.drawer h3 { font-size: 0.9rem; margin: 14px 0 2px; }
+.drawer a { color: var(--blue); }
+.close { position: absolute; top: 8px; right: 12px; border: 0; background: transparent; color: inherit; font-size: 1.5rem; }

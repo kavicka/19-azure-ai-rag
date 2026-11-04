@@ -4,5 +4,21 @@ __pycache__/
 .DS_Store
 mlruns/
 .pytest_cache/
+.ruff_cache/
 data/
 models/
+
+# local configuration: switches and endpoints (no secrets, but personal)
+.env
+.env.azure
+
+# Terraform: state holds resource ids and must never be in git; tfvars holds your budget e-mail
+infra/.terraform/
+*.tfstate
+*.tfstate.*
+infra/terraform.tfvars
+crash.log
+
+# frontend
+frontend/node_modules/
+frontend/dist/

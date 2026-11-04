@@ -1,0 +1,14 @@
+{
+ "source": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+ "checked": "2026-11-04",
+ "verified": false,
+ "note": "Global Standard, USD per 1M tokens. Copied from third-party price trackers because the official page was not reachable from the build machine. Confirm on the source page, update the numbers and set verified=true before publishing results; then run `uv run python eval/run_eval.py --rescore` to recompute the costs.",
+ "currency": "USD",
+ "usd_per_1m_tokens": {
+  "gpt-4o-mini": {"input": 0.15, "output": 0.6},
+  "gpt-4.1-mini": {"input": 0.4, "output": 1.6},
+  "gpt-4.1-nano": {"input": 0.1, "output": 0.4},
+  "gpt-5-mini": {"input": 0.25, "output": 2.0},
+  "text-embedding-3-small": {"input": 0.02}
+ }
+}
