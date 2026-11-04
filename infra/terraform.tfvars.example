@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars (git-ignored) and adjust after the quota/region check (README → Run it).
+location            = "swedencentral"
+# openai_location   = "francecentral"   # only if the model/quota is not available in `location`
+deployment_sku      = "GlobalStandard"
+chat_model          = "gpt-4o-mini"
+chat_model_version  = "2024-07-18"
+chat_capacity_ktpm  = 10
+embed_capacity_ktpm = 50
+budget_amount        = 5
+budget_contact_email = "you@example.com"
+budget_start_date    = "2026-11-01T00:00:00Z"
