@@ -2,6 +2,27 @@
 
 Pracovný plán implementácie. Po dokončení kroku sa zmaže alebo presunie do histórie, výsledok bude v `README.md` / `README.sk.md`.
 
+## Stav (2026-11-04)
+| Fáza | Stav |
+|---|---|
+| 0 · kvóta a región | ⏳ majiteľ: `make azure-preflight LOCATION=…` |
+| 1 · kostra repa | ✅ |
+| 2 · Terraform | ✅ napísané, `validate` + 7 `terraform test` s mock providerom; ⏳ `make infra-apply` |
+| 3 · Azure adaptéry | ✅ testované proti skutočným SDK s falošným HTTP transportom (bez Azure) |
+| 4 · indexy | ✅ lokálny index overený v cloude; ⏳ `make index-azure` |
+| 5 · merania | ⏳ majiteľ na Macu: `make eval-local`, `eval-azure-retrieval`, `eval-azure-generation` |
+| 6 · grafy + README | ✅ `plot.py` (overený na syntetických dátach), README kostra; čísla až z `results.json` |
+| 7 · upratanie | ⏳ `make infra-destroy`, skutočná cena, riadok v indexe |
+
+Zmeny oproti pôvodnému plánu, ktoré vyplynuli pri implementácii:
+- analyzer `standard.lucene` (nie `en.lucene`): bez stemmingu, najbližšie k vlastnému tokenizeru, takže keyword
+  porovnanie meria engine, nie iné spracovanie textu. Ostatné textové polia sú explicitne `searchable=False`.
+- `text-embedding-3-small` skrátený na 512 dimenzií (`AZURE_OPENAI_EMBED_DIMENSIONS`): vektorovú kvótu Free tieru
+  sa nepodarilo overiť z dokumentácie; `make azure-check` ju zmeria.
+- Azure OpenAI cez **v1 API** (bez `api-version`), `max_completion_tokens`, bez `seed`.
+- `pricing.json` má `verified: false`: oficiálna stránka s cenami nebola z build stroja dostupná.
+- terraform `azurerm ~> 5.12` (aktuálna major verzia 5), GlobalStandard deploymenty, `NoAutoUpgrade`.
+
 ## Cieľ
 Vziať RAG nad klinickými štúdiami z [kroku 15](https://github.com/kavicka/15-rag-fullstack-clinical) (v serving podobe z
 [kroku 17](https://github.com/kavicka/17-containers-k8s-cicd)) a vymeniť jeho časti za Azure služby **za tým istým
