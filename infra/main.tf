@@ -70,7 +70,7 @@ resource "azurerm_cognitive_deployment" "embed" {
 
 resource "azurerm_search_service" "search" {
   name                = "srch-${local.name}"
-  location            = var.location
+  location            = coalesce(var.search_location, var.location)
   resource_group_name = azurerm_resource_group.rag.name
   # free: 50 MB, shared infrastructure, no semantic ranker, no replicas/partitions; one per subscription
   sku = "free"

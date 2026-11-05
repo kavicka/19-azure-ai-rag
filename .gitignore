@@ -22,3 +22,6 @@ crash.log
 # frontend
 frontend/node_modules/
 frontend/dist/
+
+# local run logs (terraform output holds resource ids)
+logs/

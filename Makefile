@@ -3,7 +3,7 @@ SHELL := /bin/bash
 .PHONY: sync lint test data index-local azure-preflight infra-init infra-plan infra-apply infra-destroy env-from-tf \
         azure-check index-azure eval-local eval-azure-retrieval eval-azure-generation rescore plot api web
 
-LOCATION ?= swedencentral    # region to check in azure-preflight (must match infra/terraform.tfvars)
+LOCATION ?= germanywestcentral    # region to check in azure-preflight (must match infra/terraform.tfvars)
 D_EMBED  ?= local            # embeddings for the all-Azure run D: local (bge) or azure_openai (text-embedding-3-small)
 TF := terraform -chdir=infra
 # the subscription for Terraform comes from the Azure CLI login, never from a file in the repo
@@ -36,7 +36,7 @@ azure-preflight:
 	@echo "--- chat/embedding models in $(LOCATION):"
 	az cognitiveservices model list -l $(LOCATION) --query "[?model.name=='gpt-4o-mini' || model.name=='gpt-4.1-mini' || model.name=='text-embedding-3-small'].{model:model.name, version:model.version, skus:join(',', model.skus[].name)}" -o table
 	@echo "--- quota (tokens per minute, in thousands) in $(LOCATION):"
-	az cognitiveservices usage list -l $(LOCATION) --query "[?contains(name.value, 'gpt-4o-mini') || contains(name.value, 'text-embedding-3-small')].{name:name.value, used:currentValue, limit:limit}" -o table
+	az cognitiveservices usage list -l $(LOCATION) --query "[?contains(name.value, '4o-mini') || contains(name.value, '4.1-mini') || contains(name.value, 'text-embedding-3-small')].{name:name.value, used:currentValue, limit:limit}" -o table
 
 # --- Azure resources (Terraform) ---------------------------------------------------------------------------------
 infra-init:
@@ -61,9 +61,9 @@ index-azure:      ## upload chunks + bge vectors + text-embedding-3-small vector
 	uv run python -m rag.azure_index
 
 # --- measurements --------------------------------------------------------------------------------------------------
-eval-local:       ## needs `ollama serve` with qwen3:4b pulled
+eval-local:       ## needs `ollama serve` with qwen3:4b-instruct pulled
 	uv run python eval/run_eval.py --retrieval --tag local
-	LLM_PROVIDER=ollama LLM_MODEL=qwen3:4b uv run python eval/run_eval.py --generation --tag A_local --variants no_rag rerank
+	LLM_PROVIDER=ollama LLM_MODEL=qwen3:4b-instruct uv run python eval/run_eval.py --generation --tag A_local --variants no_rag rerank
 
 eval-azure-retrieval:
 	SEARCH_PROVIDER=azure_search EMBED_PROVIDER=local uv run python eval/run_eval.py --retrieval --tag azure_bge

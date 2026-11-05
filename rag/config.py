@@ -43,7 +43,7 @@ class Settings(BaseSettings):
 
     # generation
     llm_provider: Literal["ollama", "transformers", "bedrock", "azure_openai", "fake"] = "ollama"
-    llm_model: str = "qwen3:4b"  # ollama tag / HF repo id / Bedrock model id (Azure: AZURE_CHAT_DEPLOYMENT)
+    llm_model: str = "qwen3:4b-instruct"  # ollama tag / HF repo id / Bedrock model id (Azure: AZURE_CHAT_DEPLOYMENT)
     llm_temperature: float | None = 0.0  # None = provider default (reasoning models accept nothing else)
     llm_max_tokens: int = 256
     ollama_url: str = "http://localhost:11434"
@@ -52,7 +52,7 @@ class Settings(BaseSettings):
     # Azure: endpoints and names only (terraform output → `make env-from-tf`); identity comes from Entra ID
     azure_region: str | None = None  # recorded in results.json: latency depends on the distance to the region
     azure_openai_endpoint: str | None = None  # https://<resource>.openai.azure.com
-    azure_chat_deployment: str = "gpt-4o-mini"  # Azure routes by *deployment* name (infra/main.tf)
+    azure_chat_deployment: str = "gpt-4.1-mini"  # Azure routes by *deployment* name (infra/main.tf)
     azure_openai_embed_deployment: str = "text-embedding-3-small"
     azure_openai_embed_dimensions: int | None = None  # None = the model's native size (1536 for -3-small)
     azure_search_endpoint: str | None = None  # https://<service>.search.windows.net

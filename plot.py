@@ -31,8 +31,8 @@ STACKS = [  # results["retrieval"] tag → label, color
 MODES = ["bm25", "dense", "hybrid", "rerank"]
 MODE_LABEL = {"bm25": "keyword\n(BM25)", "dense": "vector", "hybrid": "hybrid\n(RRF)", "rerank": "hybrid +\nreranker"}
 RUNS = [  # (results["generation"] tag, variant, label, LLM color, marker)
-    ("A_local", "no_rag", "A · qwen3:4b alone", "#2a78d6", "o"),
-    ("A_local", "rerank", "A · qwen3:4b + local search", "#2a78d6", "s"),
+    ("A_local", "no_rag", "A · qwen3:4b-instruct alone", "#2a78d6", "o"),
+    ("A_local", "rerank", "A · qwen3:4b-instruct + local search", "#2a78d6", "s"),
     ("B_azure_llm", "no_rag", "B · Azure mini alone", "#eb6834", "o"),
     ("C_azure_llm_local_search", "rerank", "C · Azure mini + local search", "#eb6834", "s"),
     ("D_azure_full", "hybrid", "D · Azure mini + Azure hybrid", "#eb6834", "^"),
@@ -115,7 +115,9 @@ def plot_generation(res: dict) -> None:
         ax.set_title(title, fontsize=10, color=INK, loc="left")
     acc.set_yticks(list(rows), [lab for lab, _, _, _ in pts])
     acc.invert_yaxis()
-    fig.suptitle("blue = local LLM (qwen3:4b), orange = Azure OpenAI", fontsize=9, color=MUTED, x=0.02, ha="left")
+    fig.suptitle(
+        "blue = local LLM (qwen3:4b-instruct), orange = Azure OpenAI", fontsize=9, color=MUTED, x=0.02, ha="left"
+    )
     save(fig, "generation.png")
 
 

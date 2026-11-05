@@ -1,8 +1,8 @@
 {
- "source": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
- "checked": "2026-11-04",
- "verified": false,
- "note": "Global Standard, USD per 1M tokens. Copied from third-party price trackers because the official page was not reachable from the build machine. Confirm on the source page, update the numbers and set verified=true before publishing results; then run `uv run python eval/run_eval.py --rescore` to recompute the costs.",
+ "source": "https://prices.azure.com/api/retail/prices (serviceName 'Foundry Models', Global Standard meters, retail USD)",
+ "checked": "2026-11-05",
+ "verified": true,
+ "note": "Global Standard, USD per 1M tokens, from Azure's official Retail Prices API on 2026-11-05: 'gpt 4.1 mini Inp/Outp glbl', 'gpt-4o-mini-0718-Inp/Outp-glbl' (germanywestcentral) and 'text-embedding-3-small-glbl' (westeurope). gpt-4.1-nano and gpt-5-mini are not checked. After changing a price run `uv run python eval/run_eval.py --rescore`.",
  "currency": "USD",
  "usd_per_1m_tokens": {
   "gpt-4o-mini": {"input": 0.15, "output": 0.6},

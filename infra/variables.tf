@@ -11,11 +11,17 @@ variable "prefix" {
 variable "location" {
   description = "Region for the resource group and Azure AI Search. Azure for Students allows only some regions (Azure Policy → Assignments → 'Allowed resource deployment regions')."
   type        = string
-  default     = "swedencentral"
+  default     = "germanywestcentral"
 }
 
 variable "openai_location" {
   description = "Region for Azure OpenAI, if the model or quota is only available elsewhere. Empty = var.location."
+  type        = string
+  default     = ""
+}
+
+variable "search_location" {
+  description = "Region for Azure AI Search, if the Free tier has no capacity in var.location (InsufficientResourcesAvailable). Empty = var.location."
   type        = string
   default     = ""
 }
@@ -33,19 +39,19 @@ variable "deployment_sku" {
 variable "chat_model" {
   description = "Chat model for generation (the cheapest 'mini' model the subscription has quota for)."
   type        = string
-  default     = "gpt-4o-mini"
+  default     = "gpt-4.1-mini"
 }
 
 variable "chat_model_version" {
   description = "Pinned model version, so the measured model cannot change under the eval."
   type        = string
-  default     = "2024-07-18"
+  default     = "2025-04-14"
 }
 
 variable "chat_capacity_ktpm" {
-  description = "Chat deployment capacity in thousands of tokens per minute. Must fit the subscription's quota (az cognitiveservices usage list)."
+  description = "Chat deployment capacity in thousands of tokens per minute; it also sets requests per minute (10 = 10 RPM, which throttles a sequential eval). Costs nothing by itself (billing is per token). Must fit the subscription's quota (az cognitiveservices usage list)."
   type        = number
-  default     = 10
+  default     = 100
   validation {
     condition     = var.chat_capacity_ktpm >= 1
     error_message = "At least 1 (= 1,000 tokens per minute)."

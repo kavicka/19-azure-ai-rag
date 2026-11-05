@@ -63,7 +63,7 @@ run "pinned_models" {
     error_message = "The measured model must not auto-upgrade"
   }
   assert {
-    condition     = azurerm_cognitive_deployment.chat.model[0].version == "2024-07-18"
+    condition     = azurerm_cognitive_deployment.chat.model[0].version == "2025-04-14"
     error_message = "Chat model version must be pinned"
   }
   assert {

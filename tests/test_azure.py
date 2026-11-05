@@ -335,10 +335,12 @@ def test_prices_match_the_longest_model_name():
 
 def test_pricing_file_is_complete_and_honest():
     p = load_prices()
-    assert p["source"].startswith("https://azure.microsoft.com/") and p["checked"]
+    # an official Microsoft source only: the price page or the Retail Prices API behind it
+    assert p["source"].startswith(("https://azure.microsoft.com/", "https://prices.azure.com/")) and p["checked"]
     assert isinstance(p["verified"], bool)
     assert all("input" in v for v in p["usd_per_1m_tokens"].values())
-    assert price_for("gpt-4o-mini-2024-07-18") is not None and price_for("text-embedding-3-small") is not None
+    for model in ("gpt-4o-mini-2024-07-18", "gpt-4.1-mini-2025-04-14", "text-embedding-3-small"):
+        assert price_for(model) is not None, model
 
 
 @pytest.mark.parametrize(

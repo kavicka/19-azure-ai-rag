@@ -1,0 +1,501 @@
+{
+ "azure_service": {
+  "date": "2026-11-05T17:58:22+00:00",
+  "region": "switzerlandnorth",
+  "entra_token": "ok",
+  "embedding": {
+   "model": "text-embedding-3-small",
+   "dimensions": 1536
+  },
+  "chat": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "reply": "OK."
+  },
+  "search_free_tier": {
+   "indexes": {
+    "usage": 1.0,
+    "quota": 3.0
+   },
+   "documents": {
+    "usage": 5218.0,
+    "quota": null
+   },
+   "storage_mb": {
+    "usage": 83.22,
+    "quota": 50.0
+   },
+   "vector_index_mb": {
+    "usage": 55.15,
+    "quota": null
+   }
+  }
+ },
+ "azure_index": {
+  "date": "2026-11-05T15:57:07+00:00",
+  "region": "switzerlandnorth",
+  "index": "chunks-section",
+  "chunking": "section",
+  "n_chunks": 5218,
+  "document_count": 5218,
+  "storage_mb": 0.0,
+  "vector_index_mb": 0.0,
+  "upload_seconds": 52.4,
+  "bge": {
+   "model": "BAAI/bge-small-en-v1.5",
+   "dimensions": 384
+  },
+  "te3": {
+   "deployment": "text-embedding-3-small",
+   "model": "text-embedding-3-small",
+   "dimensions": 512,
+   "tokens": 1377840,
+   "cost_usd": 0.0275568,
+   "seconds": 1884.9
+  },
+  "prices": {
+   "source": "https://prices.azure.com/api/retail/prices (serviceName 'Foundry Models', Global Standard meters, retail USD)",
+   "checked": "2026-11-05",
+   "verified": true
+  }
+ },
+ "retrieval": {
+  "local": {
+   "meta": {
+    "date": "2026-11-05T15:57:33+00:00",
+    "hardware": "Darwin arm, onnxruntime cpu, 12 cores",
+    "search_provider": "local",
+    "embed_provider": "local",
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": "switzerlandnorth",
+    "retriever": "local:bm25+qdrant(BAAI/bge-small-en-v1.5)",
+    "n_questions": 141,
+    "modes": [
+     "bm25",
+     "dense",
+     "hybrid",
+     "rerank"
+    ]
+   },
+   "section": {
+    "n_chunks": 5218,
+    "bm25": {
+     "evidence@1": 0.421,
+     "evidence@5": 0.905,
+     "evidence@10": 0.984,
+     "evidence_mrr@10": 0.613,
+     "trial@1": 0.993,
+     "trial@5": 1.0,
+     "latency_ms_p50": 0.2,
+     "latency_ms_p95": 0.3
+    },
+    "dense": {
+     "evidence@1": 0.667,
+     "evidence@5": 0.968,
+     "evidence@10": 0.992,
+     "evidence_mrr@10": 0.788,
+     "trial@1": 1.0,
+     "trial@5": 1.0,
+     "latency_ms_p50": 6.6,
+     "latency_ms_p95": 10.6
+    },
+    "hybrid": {
+     "evidence@1": 0.492,
+     "evidence@5": 0.976,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.705,
+     "trial@1": 1.0,
+     "trial@5": 1.0,
+     "latency_ms_p50": 7.2,
+     "latency_ms_p95": 9.0
+    },
+    "rerank": {
+     "evidence@1": 0.857,
+     "evidence@5": 0.992,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.917,
+     "trial@1": 0.993,
+     "trial@5": 1.0,
+     "latency_ms_p50": 287.3,
+     "latency_ms_p95": 369.4
+    }
+   }
+  },
+  "azure_bge": {
+   "meta": {
+    "date": "2026-11-05T16:30:50+00:00",
+    "hardware": "Darwin arm, onnxruntime cpu, 12 cores",
+    "search_provider": "azure_search",
+    "embed_provider": "local",
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": "switzerlandnorth",
+    "retriever": "azure_search:chunks-section(BAAI/bge-small-en-v1.5)",
+    "n_questions": 141,
+    "modes": [
+     "bm25",
+     "dense",
+     "hybrid",
+     "rerank"
+    ]
+   },
+   "section": {
+    "n_chunks": 5218,
+    "bm25": {
+     "evidence@1": 0.413,
+     "evidence@5": 0.913,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.61,
+     "trial@1": 0.993,
+     "trial@5": 1.0,
+     "latency_ms_p50": 48.8,
+     "latency_ms_p95": 131.8
+    },
+    "dense": {
+     "evidence@1": 0.667,
+     "evidence@5": 0.968,
+     "evidence@10": 0.992,
+     "evidence_mrr@10": 0.788,
+     "trial@1": 1.0,
+     "trial@5": 1.0,
+     "latency_ms_p50": 57.6,
+     "latency_ms_p95": 134.3
+    },
+    "hybrid": {
+     "evidence@1": 0.524,
+     "evidence@5": 0.984,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.725,
+     "trial@1": 1.0,
+     "trial@5": 1.0,
+     "latency_ms_p50": 92.2,
+     "latency_ms_p95": 183.9
+    },
+    "rerank": {
+     "evidence@1": 0.857,
+     "evidence@5": 0.992,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.917,
+     "trial@1": 0.993,
+     "trial@5": 1.0,
+     "latency_ms_p50": 463.0,
+     "latency_ms_p95": 638.6
+    }
+   }
+  },
+  "azure_te3": {
+   "meta": {
+    "date": "2026-11-05T16:32:42+00:00",
+    "hardware": "Darwin arm, onnxruntime cpu, 12 cores",
+    "search_provider": "azure_search",
+    "embed_provider": "azure_openai",
+    "embed_model": "text-embedding-3-small",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": "switzerlandnorth",
+    "retriever": "azure_search:chunks-section(azure_openai:text-embedding-3-small)",
+    "n_questions": 141,
+    "modes": [
+     "dense",
+     "hybrid",
+     "rerank"
+    ],
+    "query_embed_tokens": 13791,
+    "query_embed_cost_usd": 0.00027581999999999997
+   },
+   "section": {
+    "n_chunks": 5218,
+    "dense": {
+     "evidence@1": 0.778,
+     "evidence@5": 0.976,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.859,
+     "trial@1": 0.979,
+     "trial@5": 1.0,
+     "latency_ms_p50": 252.0,
+     "latency_ms_p95": 505.9
+    },
+    "hybrid": {
+     "evidence@1": 0.627,
+     "evidence@5": 0.992,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.779,
+     "trial@1": 0.979,
+     "trial@5": 1.0,
+     "latency_ms_p50": 286.5,
+     "latency_ms_p95": 527.3
+    },
+    "rerank": {
+     "evidence@1": 0.857,
+     "evidence@5": 0.984,
+     "evidence@10": 1.0,
+     "evidence_mrr@10": 0.917,
+     "trial@1": 0.993,
+     "trial@5": 1.0,
+     "latency_ms_p50": 645.5,
+     "latency_ms_p95": 879.9
+    }
+   }
+  }
+ },
+ "generation": {
+  "A_local": {
+   "meta": {
+    "date": "2026-11-05T17:57:33+00:00",
+    "hardware": "Darwin arm, onnxruntime cpu, 12 cores",
+    "search_provider": "local",
+    "embed_provider": "local",
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": "switzerlandnorth",
+    "llm": "ollama:qwen3:4b-instruct",
+    "retriever": "local:bm25+qdrant(BAAI/bge-small-en-v1.5)",
+    "k": 5,
+    "n_questions": 156,
+    "temperature": 0.0,
+    "max_tokens": 256,
+    "prices": null,
+    "llm_model_versions": [
+     "qwen3:4b-instruct"
+    ]
+   },
+   "no_rag": {
+    "n": 156,
+    "accuracy": 0.143,
+    "grounded": 0.0,
+    "false_abstain": 0.77,
+    "abstain_unans": 1.0,
+    "bad_citations": 0.0,
+    "errors": 0,
+    "latency_ms_p50": 387,
+    "latency_ms_p95": 1373,
+    "ttft_ms_p50": 150,
+    "ttft_ms_p95": 272,
+    "input_tokens_mean": 77.9,
+    "output_tokens_mean": 9.7,
+    "cost_usd_per_answer": 0.0,
+    "cost_usd_total": 0.0,
+    "by_kind": {
+     "enrollment": 0,
+     "intervention": 0.667,
+     "masking": 0.056,
+     "min_age": 0.222,
+     "phase": 0.056,
+     "sponsor": 0,
+     "start_year": 0
+    }
+   },
+   "rerank": {
+    "n": 156,
+    "accuracy": 0.992,
+    "grounded": 0.992,
+    "false_abstain": 0.0,
+    "abstain_unans": 1.0,
+    "bad_citations": 0.0,
+    "errors": 0,
+    "latency_ms_p50": 3825,
+    "latency_ms_p95": 6204,
+    "ttft_ms_p50": 2792,
+    "ttft_ms_p95": 4741,
+    "input_tokens_mean": 1193.6,
+    "output_tokens_mean": 26.4,
+    "cost_usd_per_answer": 0.0,
+    "cost_usd_total": 0.0,
+    "by_kind": {
+     "enrollment": 1,
+     "intervention": 1,
+     "masking": 1,
+     "min_age": 0.944,
+     "phase": 1,
+     "sponsor": 1,
+     "start_year": 1
+    }
+   }
+  },
+  "B_azure_llm": {
+   "meta": {
+    "date": "2026-11-05T17:40:53+00:00",
+    "hardware": "Darwin arm, onnxruntime cpu, 12 cores",
+    "search_provider": "local",
+    "embed_provider": "local",
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": "switzerlandnorth",
+    "llm": "azure_openai:gpt-4.1-mini",
+    "retriever": null,
+    "k": 5,
+    "n_questions": 156,
+    "temperature": 0.0,
+    "max_tokens": 256,
+    "prices": {
+     "source": "https://prices.azure.com/api/retail/prices (serviceName 'Foundry Models', Global Standard meters, retail USD)",
+     "checked": "2026-11-05",
+     "verified": true
+    },
+    "llm_model_versions": [
+     "gpt-4.1-mini-2025-04-14"
+    ]
+   },
+   "no_rag": {
+    "n": 156,
+    "accuracy": 0.349,
+    "grounded": 0.0,
+    "false_abstain": 0.079,
+    "abstain_unans": 0.733,
+    "bad_citations": 0.0,
+    "errors": 0,
+    "latency_ms_p50": 998,
+    "latency_ms_p95": 6294,
+    "ttft_ms_p50": 941,
+    "ttft_ms_p95": 6278,
+    "input_tokens_mean": 73.2,
+    "output_tokens_mean": 21.0,
+    "cost_usd_per_answer": 6.3e-05,
+    "cost_usd_total": 0.00982,
+    "by_kind": {
+     "enrollment": 0,
+     "intervention": 0.667,
+     "masking": 0.278,
+     "min_age": 0.722,
+     "phase": 0.444,
+     "sponsor": 0.167,
+     "start_year": 0.167
+    }
+   }
+  },
+  "C_azure_llm_local_search": {
+   "meta": {
+    "date": "2026-11-05T17:47:15+00:00",
+    "hardware": "Darwin arm, onnxruntime cpu, 12 cores",
+    "search_provider": "local",
+    "embed_provider": "local",
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": "switzerlandnorth",
+    "llm": "azure_openai:gpt-4.1-mini",
+    "retriever": "local:bm25+qdrant(BAAI/bge-small-en-v1.5)",
+    "k": 5,
+    "n_questions": 156,
+    "temperature": 0.0,
+    "max_tokens": 256,
+    "prices": {
+     "source": "https://prices.azure.com/api/retail/prices (serviceName 'Foundry Models', Global Standard meters, retail USD)",
+     "checked": "2026-11-05",
+     "verified": true
+    },
+    "llm_model_versions": [
+     "gpt-4.1-mini-2025-04-14"
+    ]
+   },
+   "rerank": {
+    "n": 156,
+    "accuracy": 0.984,
+    "grounded": 0.984,
+    "false_abstain": 0.0,
+    "abstain_unans": 1.0,
+    "bad_citations": 0.0,
+    "errors": 0,
+    "latency_ms_p50": 1252,
+    "latency_ms_p95": 1801,
+    "ttft_ms_p50": 1148,
+    "ttft_ms_p95": 1713,
+    "input_tokens_mean": 1080.8,
+    "output_tokens_mean": 29.7,
+    "cost_usd_per_answer": 0.0004798,
+    "cost_usd_total": 0.07485,
+    "by_kind": {
+     "enrollment": 0.944,
+     "intervention": 1,
+     "masking": 1,
+     "min_age": 0.944,
+     "phase": 1,
+     "sponsor": 1,
+     "start_year": 1
+    }
+   }
+  },
+  "D_azure_full": {
+   "meta": {
+    "date": "2026-11-05T17:50:38+00:00",
+    "hardware": "Darwin arm, onnxruntime cpu, 12 cores",
+    "search_provider": "azure_search",
+    "embed_provider": "local",
+    "embed_model": "BAAI/bge-small-en-v1.5",
+    "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "chunking": "section",
+    "azure_region": "switzerlandnorth",
+    "llm": "azure_openai:gpt-4.1-mini",
+    "retriever": "azure_search:chunks-section(BAAI/bge-small-en-v1.5)",
+    "k": 5,
+    "n_questions": 156,
+    "temperature": 0.0,
+    "max_tokens": 256,
+    "prices": {
+     "source": "https://prices.azure.com/api/retail/prices (serviceName 'Foundry Models', Global Standard meters, retail USD)",
+     "checked": "2026-11-05",
+     "verified": true
+    },
+    "llm_model_versions": [
+     "gpt-4.1-mini-2025-04-14"
+    ]
+   },
+   "hybrid": {
+    "n": 156,
+    "accuracy": 0.992,
+    "grounded": 0.992,
+    "false_abstain": 0.008,
+    "abstain_unans": 1.0,
+    "bad_citations": 0.0,
+    "errors": 0,
+    "latency_ms_p50": 1026,
+    "latency_ms_p95": 1646,
+    "ttft_ms_p50": 925,
+    "ttft_ms_p95": 1573,
+    "input_tokens_mean": 905.7,
+    "output_tokens_mean": 28.6,
+    "cost_usd_per_answer": 0.0004081,
+    "cost_usd_total": 0.06366,
+    "by_kind": {
+     "enrollment": 1,
+     "intervention": 1,
+     "masking": 1,
+     "min_age": 0.944,
+     "phase": 1,
+     "sponsor": 1,
+     "start_year": 1
+    }
+   },
+   "rerank": {
+    "n": 156,
+    "accuracy": 0.984,
+    "grounded": 0.984,
+    "false_abstain": 0.0,
+    "abstain_unans": 1.0,
+    "bad_citations": 0.0,
+    "errors": 0,
+    "latency_ms_p50": 1434,
+    "latency_ms_p95": 1938,
+    "ttft_ms_p50": 1353,
+    "ttft_ms_p95": 1859,
+    "input_tokens_mean": 1074.9,
+    "output_tokens_mean": 29.4,
+    "cost_usd_per_answer": 0.0004769,
+    "cost_usd_total": 0.0744,
+    "by_kind": {
+     "enrollment": 0.944,
+     "intervention": 1,
+     "masking": 1,
+     "min_age": 0.944,
+     "phase": 1,
+     "sponsor": 1,
+     "start_year": 1
+    }
+   }
+  }
+ }
+}

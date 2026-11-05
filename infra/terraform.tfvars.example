@@ -1,10 +1,11 @@
 # Copy to terraform.tfvars (git-ignored) and adjust after the quota/region check (README → Run it).
-location            = "swedencentral"
+location            = "germanywestcentral"
 # openai_location   = "francecentral"   # only if the model/quota is not available in `location`
+search_location     = "switzerlandnorth" # Search Free had no capacity in germanywestcentral on 2026-11-05
 deployment_sku      = "GlobalStandard"
-chat_model          = "gpt-4o-mini"
-chat_model_version  = "2024-07-18"
-chat_capacity_ktpm  = 10
+chat_model          = "gpt-4.1-mini"
+chat_model_version  = "2025-04-14"
+chat_capacity_ktpm  = 100 # also sets requests/minute (10k TPM = 10 RPM throttled the eval)
 embed_capacity_ktpm = 50
 budget_amount        = 5
 budget_contact_email = "you@example.com"

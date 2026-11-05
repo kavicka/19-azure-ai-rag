@@ -52,7 +52,10 @@ class OllamaLLM:
             "model": self.s.llm_model,
             "messages": messages,
             "stream": True,
-            "think": False,  # Qwen3 would otherwise spend hundreds of tokens "thinking" before answering
+            # Qwen3 would otherwise spend hundreds of tokens "thinking" before answering. Thinking-only tags
+            # (e.g. `qwen3:4b`, now the 2507 thinking model) ignore this and write their reasoning into the answer:
+            # use an instruct tag such as `qwen3:4b-instruct`.
+            "think": False,
             "options": {"temperature": self.s.llm_temperature or 0.0, "num_predict": self.s.llm_max_tokens, "seed": 0},
         }
         with httpx.stream("POST", f"{self.s.ollama_url}/api/chat", json=body, timeout=120) as r:
